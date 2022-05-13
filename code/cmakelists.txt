@@ -1,0 +1,14 @@
+cmake_minimum_required(VERSION 3.2 FATAL_ERROR)
+project(badin_boatdetector)
+
+find_package(OpenCV REQUIRED)
+
+include_directories(${OpenCV_INCLUDE_DIRS} ${PROJECT_SOURCE_DIR}/src ${PROJECT_SOURCE_DIR}/include)
+
+add_library(Trainer src/Trainer.cpp include/Trainer.h)
+add_library(Segment src/Segment.cpp include/Segment.h)
+add_library(Detector src/Detector.cpp include/Detector.h)
+
+add_executable(${PROJECT_NAME} src/project-boat-detection.cpp)
+
+target_link_libraries(${PROJECT_NAME} ${OpenCV_LIBS} Trainer Segment Detector)
